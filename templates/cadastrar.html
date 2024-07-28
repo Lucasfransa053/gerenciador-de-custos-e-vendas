@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Produto</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .btn-primary, .btn-secondary {
+            color: white;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Cadastrar Produto</h1>
+        <form action="{{ url_for('produto_bp.cadastrar_produto') }}" method="post">
+            <div class="form-group">
+                <label for="nome">Nome do Produto</label>
+                <input type="text" class="form-control" id="nome" name="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="custo">Custo</label>
+                <input type="number" step="0.01" class="form-control" id="custo" name="custo" required>
+            </div>
+            <div class="form-group">
+                <label for="preco_venda_desejado">Preço de Venda Desejado</label>
+                <input type="number" step="0.01" class="form-control" id="preco_venda_desejado" name="preco_venda_desejado" required>
+            </div>
+            <center>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <a href="{{ url_for('index') }}" class="btn btn-secondary ml-2">Voltar</a>
+            </center>
+        </form>
+    </div>
+</body>
+</html>

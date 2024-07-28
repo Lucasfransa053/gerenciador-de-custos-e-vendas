@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .btn-success, .btn-primary, .btn-danger, .btn-secondary {
+            color: white;
+        }
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .thead-custom {
+            background-color: #007bff;
+            color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Produtos Disponíveis</h1>
+        
+        <form action="{{ url_for('produto_bp.listar_produtos') }}" method="post" class="form-inline my-2 my-lg-0 justify-content-center">
+            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar produtos" aria-label="Pesquisar" name="termo_pesquisa">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+        </form>
+        
+        <table class="table table-bordered mt-4">
+            <thead class="thead-custom">
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Custo</th>
+                    <th>Preço de Venda Desejado</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for produto in produtos_disponiveis %}
+                <tr>
+                    <td>{{ produto.id }}</td>
+                    <td>{{ produto.nome }}</td>
+                    <td>{{ produto.custo }}</td>
+                    <td>{{ produto.preco_venda_desejado }}</td>
+                    <td>
+                        <a href="{{ url_for('produto_bp.vender_produto', id=produto.id) }}" class="btn btn-success">Tornar Vendido</a>
+                        <a href="{{ url_for('produto_bp.editar_produto', id=produto.id) }}" class="btn btn-primary">Editar</a>
+                        <form action="{{ url_for('produto_bp.deletar_produto', id=produto.id) }}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h1 class="text-center mb-4">Produtos Vendidos</h1>
+        <table class="table table-bordered">
+            <thead class="thead-custom">
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Custo</th>
+                    <th>Preço de Venda</th>
+                    <th>Lucro</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for produto in produtos_vendidos %}
+                <tr>
+                    <td>{{ produto.id }}</td>
+                    <td>{{ produto.nome }}</td>
+                    <td>{{ produto.custo }}</td>
+                    <td>{{ produto.venda }}</td>
+                    <td>{{ produto.venda - produto.custo }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-center mt-4">
+            <a href="{{ url_for('index') }}" class="btn btn-primary">Voltar</a>
+        </div>
+    </div>
+</body>
+</html>

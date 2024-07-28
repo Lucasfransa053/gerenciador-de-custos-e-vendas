@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Custos e Vendas</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .banner {
+            background-color: #007bff;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        .banner h1 {
+            font-size: 3em;
+        }
+        .description {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .btn-custom {
+            width: 200px;
+            margin: 10px auto;
+            font-size: 1.2em;
+        }
+        .btn-primary, .btn-secondary, .btn-success {
+            color: white;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <h1>Gerenciador de Custos e Vendas</h1>
+    </div>
+    <div class="container text-center">
+        <p class="description">
+            Simplifique a gestão dos seus produtos e maximize seus lucros com nosso gerenciador de custos e vendas.
+        </p>
+
+        {% if 'user_id' not in session %}
+            <a href="{{ url_for('user_bp.login') }}" class="btn btn-primary btn-custom">Fazer Login</a>
+            <a href="{{ url_for('user_bp.register') }}" class="btn btn-secondary btn-custom">Cadastrar</a>
+        {% else %}
+            <a href="{{ url_for('produto_bp.cadastrar_produto') }}" class="btn btn-success btn-custom">Cadastrar Produto</a>
+            <a href="{{ url_for('produto_bp.listar_produtos') }}" class="btn btn-primary btn-custom">Listar Produtos</a>
+            <a href="{{ url_for('user_bp.logout') }}" class="btn btn-secondary btn-custom">Logout</a>
+        {% endif %}
+    </div>
+</body>
+</html>

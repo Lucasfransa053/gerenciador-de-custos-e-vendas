@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .btn-primary, .btn-secondary {
+            color: white;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+        .flash-message {
+            color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Login</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="flash-message text-center">
+              {% for category, message in messages %}
+                {% if category == 'danger_login' %}
+                  {{ message }}
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+        <form action="{{ url_for('user_bp.login') }}" method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <center>
+            <button type="submit" class="btn btn-primary">Login</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary ml-2">Voltar</a>
+            </center>
+        </form>
+    </div>
+</body>
+</html>
